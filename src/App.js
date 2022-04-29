@@ -1,17 +1,17 @@
 import React from 'react'
 import Joke from './Joke'
+import jokesData from "./jokesData"
 import './App.css'
 
 function App() {
+  const jokeComponents = jokesData.map(joke => 
+    { return <Joke 
+    key={joke.id} 
+    question={joke.question}
+    punchline={joke.punchline}/>})
   return (
     <div >
-      <Joke punchline="Who is in the garden?"/>
-      <Joke question="Who is a boy?" punchline="Ade is a boy!"/>
-      <Joke question="Who is a girl?" punchline="Simbi is a girl!"/>
-      <Joke question="Who is a boy?" punchline="Adebayo is a boy!"/>
-      <Joke question="Who is a girl?" punchline="Simisola is a girl!"/>
-      
-
+      {jokeComponents}
     </div>
   );
 }
