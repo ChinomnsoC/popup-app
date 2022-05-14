@@ -1,19 +1,39 @@
 import React from 'react'
-import Joke from './Joke'
-import jokesData from "./jokesData"
+import productsData from "./vschoolProducts"
+import Popup from './Popup'
+import { useState } from 'react';
+
 import './App.css'
 
 function App() {
-  const jokeComponents = jokesData.map(joke => 
-    { return <Joke 
-    key={joke.id} 
-    question={joke.question}
-    punchline={joke.punchline}/>})
+  const [isPopupOpen, setIsPopupOpen] = useState(false)
+  const [product, setProduct] = useState(productsData[0])
+  const togglePopup = () => {
+    setIsPopupOpen(!isPopupOpen)
+  }
+  const getProduct = (id) => {
+    const productObj = productsData.find(info => info.id===id)
+    setProduct(productObj)
+  }
   return (
-    <div >
-      {jokeComponents}
-    </div>
-  );
+      <div >
+        <div className="navbar">
+        <p>Products On Sale</p>
+        </div>
+        {productsData.map(good => <div key={good.id}>
+          <button onClick={() =>  {
+            //getProduct(good.id)
+            setProduct(good)
+            togglePopup()
+          }}> {good.name}</button> </div>)}
+        {isPopupOpen && <Popup item={product} handleClose={togglePopup}/>}
+        
+        
+        
+          
+      </div>
+  )
 }
 
 export default App
+
